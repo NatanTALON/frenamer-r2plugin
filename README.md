@@ -24,9 +24,9 @@ This section describes a local build and installation of frenamer Radare2 plugin
 ### Process
 
 * Clone the repository:
-  * `git clone https://github.com/avast/retdec-r2plugin`
+  * `git clone https://github.com/NatanTALON/frenamer-r2plugin.git`
 * Linux and MacOS:
-  * `cd retdec-r2plugin`
+  * `cd frenamer-r2plugin`
   * `mkdir build && cd build`
   * `cmake .. -DCMAKE_INSTALL_PREFIX=<path>`
   * `make -jN` (`N` is the number of processes to use for parallel build, typically number of cores + 1 gives fastest compilation time)
