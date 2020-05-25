@@ -10,7 +10,10 @@ NameGenerator::~NameGenerator()
 char* NameGenerator::generateName(RAnalFunction *fcn)
 {
     /* select a noun and an adjectif in the list */
-    size_t hash = hfcn(fcn->addr);
+    char s_addr[9];
+    std::snprintf(s_addr,8,"%llx",fcn->addr);
+    s_addr[8] = '\0';
+    size_t hash = hfcn(std::string(s_addr));
     int noun_num = hash%231;
     int adj_num = hash%200;
 
@@ -20,10 +23,8 @@ char* NameGenerator::generateName(RAnalFunction *fcn)
     char calls[10];
     int xrefs_size, calls_size;    
     
-    /* every xrefs should be take into account: calls, jumps... */
-    xrefs_size = std::snprintf(xrefs, 10, "%d", r_anal_function_get_xrefs(fcn)->length);
     /* We only count the calls for the references. Else all jumps or string load are counted */
-    RList *refs_list = r_anal_function_get_refs(fcn);
+    RList *refs_list = r_anal_function_get_xrefs(fcn);
     int refs_num = 0;
     for (RListIter *it = refs_list->head; it; it = it->n)
     {
@@ -33,7 +34,18 @@ char* NameGenerator::generateName(RAnalFunction *fcn)
         if (ref->type == R_ANAL_REF_TYPE_CALL)
             refs_num++;
     }
-    
+    xrefs_size = std::snprintf(xrefs, 10, "%d", refs_num);
+
+    refs_list = r_anal_function_get_refs(fcn);
+    refs_num = 0;
+    for (RListIter *it = refs_list->head; it; it = it->n)
+    {
+        RAnalRef *ref = reinterpret_cast<RAnalRef*>(it->data);
+        if (ref == nullptr)
+            continue;
+        if (ref->type == R_ANAL_REF_TYPE_CALL)
+            refs_num++;
+    }
     calls_size = std::snprintf(calls, 10, "%d", refs_num);
 
     /* If the number of xrefs or refs are expressed with more than 9 digits, replace the number by + */

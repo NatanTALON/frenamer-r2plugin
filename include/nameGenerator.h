@@ -24,7 +24,7 @@ private:
 
     const std::string adj_list[200] = {"obedient","rich","magnificent","spiteful","disagreeable","legal","brave","ruddy","eager","quack","victorious",
     "exultant","clean","even","thin","like","cruel","dapper","merciful","sharp","languid","new","mountainous","assorted","fancy","regular","sordid",
-    "extra-large","tightfisted","tiny","imported","truthful","easy","tough","madly","whimsical","tight","plain","dynamic","bored","high","sedate","amused",
+    "huge","tightfisted","tiny","imported","truthful","easy","tough","madly","whimsical","tight","plain","dynamic","bored","high","sedate","amused",
     "illustrious","inquisitive","superficial","sophisticated","disgusting","delicious","possible","tasteless","versed","ethereal","diligent","wry","oafish",
     "dramatic","sore","superb","tall","fine","shocking","gigantic","makeshift","wise","lean","striped","little","gaudy","nosy","cumbersome","longing",
     "gainful","free","three","proud","wrong","lopsided","macabre","mute","evasive","dark","debonair","torpid","homely","draconian","aquatic","tidy",
@@ -40,7 +40,7 @@ private:
     char *generated_name = NULL;
 
 protected:
-    std::hash<unsigned long long> hfcn;
+    std::hash<std::string> hfcn;
 
 public:
     ~NameGenerator();
