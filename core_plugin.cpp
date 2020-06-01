@@ -8,6 +8,9 @@
 #define CMD_PREFIX "frnm"
 
 
+/**
+ * Rename all the analysed functions
+ */
 static void renameAllFunctions(RCore &core)
 {
     NameGenerator ng;
@@ -29,6 +32,9 @@ static void renameAllFunctions(RCore &core)
     }
 }
 
+/**
+ * Rename the analysed function at the specified address
+ */
 static void renameFunctionAt(RCore &core, ut64 addr)
 {
     NameGenerator ng;
@@ -46,6 +52,9 @@ static void renameFunctionAt(RCore &core, ut64 addr)
     r_cons_printf("Function name is now : %s.\n", fcn->name);
 }
 
+/**
+ * Print the help on how to use the frnm command
+ */
 static void printHelp(const RCore &core)
 {
     const char* help[] = {
@@ -58,6 +67,12 @@ static void printHelp(const RCore &core)
     r_cons_cmd_help(help, core.print->flags & R_PRINT_FLAGS_COLOR);
 }
 
+/**
+ * This function aims at calling the right function depending on the user input
+ * Check the command :
+ * frnm rename all the functions
+ * frnma [addr] rename the function at the specific address
+ */
 static void _cmd(RCore &core, const char* input)
 {
     switch (input[0])

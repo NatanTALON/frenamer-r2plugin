@@ -4,9 +4,14 @@
 #include <string>
 #include <r_anal.h>
 
+
+/**
+ * Class that generate names based on the function address
+ */
 class NameGenerator
 {
 private:
+    // list of all possible nouns used for the name generation
     const std::string noun_list[231] = {"Aardvark","Albatross","Alligator","Alpaca","Ant","Anteater","Antelope","Ape","Armadillo","Donkey","Baboon","Badger",
     "Barracuda","Bat","Bear","Beaver","Bee","Bison","Boar","Buffalo","Butterfly","Camel","Capybara","Caribou","Cassowary","Cat","Caterpillar","Cattle","Chamois",
     "Cheetah","Chicken","Chimpanzee","Chinchilla","Chough","Clam","Cobra","Cockroach","Cod","Cormorant","Coyote","Crab","Crane","Crocodile","Crow","Curlew","Deer",
@@ -21,7 +26,7 @@ private:
     "Seahorse","Seal","Shark","Sheep","Shrew","Skunk","Snail","Snake","Sparrow","Spider","Spoonbill","Squid","Squirrel","Starling","Stingray","Stinkbug","Stork",
     "Swallow","Swan","Tapir","Tarsier","Termite","Tiger","Toad","Trout","Turkey","Turtle","Viper","Vulture","Wallaby","Walrus","Wasp","Weasel","Whale","Wildcat",
     "Wolf","Wolverine","Wombat","Woodcock","Woodpecker","Worm","Wren","Yak","Zebra","Robot","Kitty","System","Impulse","Juice","Potato","Minion"};
-
+    // list of all possible adjectives used for the name generation
     const std::string adj_list[200] = {"obedient","rich","magnificent","spiteful","disagreeable","legal","brave","ruddy","eager","quack","victorious",
     "exultant","clean","even","thin","like","cruel","dapper","merciful","sharp","languid","new","mountainous","assorted","fancy","regular","sordid",
     "huge","tightfisted","tiny","imported","truthful","easy","tough","madly","whimsical","tight","plain","dynamic","bored","high","sedate","amused",
@@ -36,14 +41,19 @@ private:
     "grouchy","symptomatic","spooky","eight","unkempt","jazzy","obscene","detailed","youthful","hurt","hushed","pushy","picayune","vague","puny","fantastic",
     "cautious","parched","present","volatile","bent","caring","stale","tranquil","courageous","old","innate","daffy","breakable","next","receptive","harsh",
     "fearful","pricey","unbecoming","cold"};
-
+    // the string pointer used to store the name during name generation
     char *generated_name = NULL;
 
 protected:
+    // the hash function used to randomise the address
     std::hash<std::string> hfcn;
 
 public:
+    // destructor necessary since generated_name is allocated dynamically
     ~NameGenerator();
+
+    // the function to call to generate a name and get a pointer to generated_name
+    // the string must be copied to another location before using it
     char* generateName(RAnalFunction *fcn);
 };
 
